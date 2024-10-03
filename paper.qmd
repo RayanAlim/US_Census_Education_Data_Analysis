@@ -1,13 +1,16 @@
 ---
-title: "My title"
+title: "California Education Attainment Census Data Analysis"
 subtitle: "My subtitle if needed"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
-date: today
+  - Rayan Alim
+  - Emily Su
+  - Heyucheng Zhang
+  - Maryam Ansari
+  - Prankit Bhardwai
+  - Luka Tosic
+thanks: "Code and data are available at: https://github.com/RayanAlim/US_Census_Education_Data_Analysis/edit/main/paper.qmd"
+date: 2024-10-03
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -27,7 +30,9 @@ library(here)
 
 You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
 
-The remainder of this paper is structured as follows. @sec-data....
+The remainder of this paper is structured as follows. @sec-data.... 
+
+The data is taken from @ipumusa
 
 ```{r}
 #| include: false
