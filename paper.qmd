@@ -1,0 +1,104 @@
+---
+title: "My title"
+subtitle: "My subtitle if needed"
+author: 
+  - First author
+  - Another author
+thanks: "Code and data are available at: LINK."
+date: today
+date-format: long
+abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(dplyr)
+library(here)
+```
+
+# Introduction
+
+You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+
+The remainder of this paper is structured as follows. @sec-data....
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+# Read the data 
+data <- read_csv(here::here("data", "analysis_data", "clean_census_data.csv"))
+
+# Filter for doctoral degree holders 
+doctoral_by_state <- data %>%
+  filter(EDUCD == 116) %>%
+  group_by(STATEICP) %>%
+  summarise(doctoral_count = n())
+```
+
+```{r}
+#  total respondents in California
+total_CA <- 391171
+
+#  the number of doctoral degree holders in California
+doctoral_CA <- doctoral_by_state %>%
+  filter(STATEICP == 71) %>%
+  pull(doctoral_count)
+doctoral_CA
+```
+
+```{r}
+#  ratio for cali-  (doctoral holders / total respondents)
+ratio_CA <- doctoral_CA / total_CA
+
+# est total respondents for all states
+estimated_total_by_state <- doctoral_by_state %>%
+  mutate(estimated_total = doctoral_count / ratio_CA)
+
+estimated_total_by_state
+```
+
+
+```{r}
+# Calculate ratio for California (doctoral holders / total respondents)
+ratio_CA <- doctoral_CA / total_CA
+
+# Estimate total respondents for all states
+estimated_total_by_state <- doctoral_by_state %>%
+  mutate(estimated_total = doctoral_count / ratio_CA)
+```
+
+
+# Data {#sec-data}
+
+Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+
+```{r}
+#| label: fig-bills
+#| fig-cap: Bills of penguins
+#| echo: false
+
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(alpha = 0.8) +
+  scale_fill_manual(values = c("darkorange","purple","cyan4"),
+                    guide = "none") +
+  theme_minimal() +
+  facet_wrap(~species, ncol = 1) +
+  coord_flip()
+```
+
+
+\newpage
+
+
+# References
+
+
