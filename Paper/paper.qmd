@@ -28,7 +28,7 @@ library(knitr)
 
 # Data
 
-We use the statistical programming language R [@citeR], IPUMS [@@ipumsusa], dpylr [@dpylr], here [@here], and tidyverse [@rohan]. The data is taken from @ipumsusa. 
+We used the statistical programming language R [@citeR], dpylr [@dpylr], here [@here], and tidyverse [@rohan] to assist with cleaning and analyzing the data. The data we used is taken from IPUMS [@ipumsusa]. We rendered our table using knitr [@citeknitr]. 
 
 ## Ratio Estimator Approach 
 
@@ -73,7 +73,7 @@ ratio_CA <- doctoral_CA / total_CA
 
 # est total respondents for all states
 estimated_total_by_state <- doctoral_by_state %>%
-  mutate(estimated_total = doctoral_count / ratio_CA)
+  mutate(estimated_total = round(doctoral_count / ratio_CA))
 ```
 
 ```{r}
@@ -89,20 +89,28 @@ total_respondents_by_state <- data %>%
 comparison <- doctoral_by_state %>%
   left_join(total_respondents_by_state, by = "STATEICP") %>%
    arrange(by = "STATEICP") %>% 
-  mutate(estimated_total = doctoral_count / ratio_CA) %>%
+  mutate(estimated_total = round(doctoral_count / ratio_CA)) %>%
   select(STATEICP, doctoral_count, estimated_total, total_respondents)
 ```
 
 ```{r}
+#| label: tbl-estimated-actual
+#| tbl-cap: Comparison of Estimated vs. Actual Respondents by State Services
 #| echo: false
 #| warning: false
 #| message: false
+
 table <- comparison %>%
   kable(col.names = c("State ICP Code", "Doctoral Degree Holders", 
-                      "Estimated Total Respondents", "Actual Total Respondents"), 
-        caption = "Comparison of Estimated vs. Actual Respondents by State")
+                      "Estimated Total Respondents", "Actual Total Respondents"))
+
 table
 ```
+
+
+The estimates and the actual number of respondents in @tbl-estimated-actual are different because the ratio estimators approach doesn’t consider different factors like environment, socio-economic status of respondents, etc. that could impact a respondent’s highest educational attainment to be a doctoral degree or not.  The ratio estimators approach assumes that all states have the same factors as California that impacts a respondent’s highest educational attainment. 
+
+
 
 
 # Appendix 
