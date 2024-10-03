@@ -1,15 +1,14 @@
 ---
 title: "California Education Attainment Census Data Analysis"
-subtitle: "My subtitle if needed"
 author: 
-  - Rayan Alim
+  - Rayan Awad Alim
   - Emily Su
   - Heyucheng Zhang
   - Maryam Ansari
   - Prankit Bhardwai
   - Luka Tosic
-thanks: "Code and data are available at: https://github.com/RayanAlim/US_Census_Education_Data_Analysis/edit/main/paper.qmd"
-date: 2024-10-03
+thanks: "Code and data are available at: https://github.com/RayanAlim/US_Census_Education_Data_Analysis/"
+date: today
 date-format: long
 format: pdf
 number-sections: true
@@ -26,21 +25,20 @@ library(dplyr)
 library(here)
 ```
 
-# Introduction
+# Data
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+We use the statistical programming language R [@citeR], IPUMS [@@ipumsusa], dpylr [@dpylr], here [@here], and tidyverse [@rohan]. The data is taken from @ipumsusa. 
 
-The remainder of this paper is structured as follows. @sec-data.... 
+## Ratio Estimator Approach 
 
-The data is taken from @ipumusa
+How the ratio estimator approach works is that it estimates a population size based on a ratio of two means of information we know regarding the population. How we applied the ratio estimator is that we took the ratio of doctoral holders in California over the total number of respondents in California. For each state we figured out the number of doctoral holders and then divide this number with the ratio we obtained. 
 
-# Ratio Estimator Approach 
+The ratio estimator assumes that the proportion for California allows for a realistic estimate of the same proportion across all the states, which may not be entirely accurate as realistically it varies across states. Portfolio educational attainment might vary significantly across states due to high socioeconomic, cultural, and demographic factors. To add to this, each state has its own quality of education and a differing proportion of doctoral holders, which may affect the principle of applying a uniform ratio across all states.
 
-The ratio estimator approach, as detailed in various data storytelling methods, is a useful tool in sampling and estimating population parameters. It involves using auxiliary information to improve the precision of estimates. The basic idea is to compute the ratio of the variable of interest to an auxiliary variable, then apply this ratio to the total value of the auxiliary variable in the population to get the population estimate.
+## How to obtain IPUMS data
+In order to obtain the data from IPUMS [@@ipumsusa], first go to usa.ipums.org and then click on "Get Data" on the home page. Next click on "Select Samples", select only the 2022 ACS sample under the "USA SAMPLES" tab, and then "SUBMIT SAMPLE SELECTIONS". Then under "SELECT HARMONIZED VARIABLES" select "GEOGRAPHIC" under the "HOUSEHOLD" dropdown and choose the STATEICP variable. Under the PERSON dropdown, select EDUCATION and then the EDUC variable. After all this, click on VIEW CART on the top right and on the DATA CART Page click on "create data extract" and then on the Extract Request page make sure the data format is in the csv format. After submitting the extract on the Extract Request, create an account or log into IPUMS USA and wait for the extract to be finished and download the CSV.   
 
-The method is especially beneficial when there is a strong correlation between the study variable and the auxiliary variable. It can lead to more accurate estimates compared to simple random sampling, particularly when the auxiliary variable is easy to measure and reliably predicts the variable of interest. However, it requires careful application, especially in cases where the correlation between variables is weak, as it may not offer significant improvements in those cases.
-
-This approach has been applied in various fields, from agriculture to economics, and provides a clear example of how leveraging additional data can refine estimates beyond traditional means.
+# Results
 
 ```{r}
 #| include: false
@@ -58,6 +56,9 @@ doctoral_by_state <- data %>%
 ```
 
 ```{r}
+#| echo: false
+#| warning: false
+#| message: false
 #  total respondents in California
 total_CA <- 391171
 
@@ -65,47 +66,18 @@ total_CA <- 391171
 doctoral_CA <- doctoral_by_state %>%
   filter(STATEICP == 71) %>%
   pull(doctoral_count)
-doctoral_CA
 ```
 
 ```{r}
+#| echo: false
+#| warning: false
+#| message: false
 #  ratio for cali-  (doctoral holders / total respondents)
 ratio_CA <- doctoral_CA / total_CA
 
 # est total respondents for all states
 estimated_total_by_state <- doctoral_by_state %>%
   mutate(estimated_total = doctoral_count / ratio_CA)
-
-estimated_total_by_state
-```
-
-
-```{r}
-# Calculate ratio for California (doctoral holders / total respondents)
-ratio_CA <- doctoral_CA / total_CA
-
-# Estimate total respondents for all states
-estimated_total_by_state <- doctoral_by_state %>%
-  mutate(estimated_total = doctoral_count / ratio_CA)
-```
-
-
-# Data {#sec-data}
-
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
 ```
 
 
