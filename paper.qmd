@@ -34,6 +34,14 @@ The remainder of this paper is structured as follows. @sec-data....
 
 The data is taken from @ipumusa
 
+# Ratio Estimator Approach 
+
+The ratio estimator approach, as detailed in various data storytelling methods, is a useful tool in sampling and estimating population parameters. It involves using auxiliary information to improve the precision of estimates. The basic idea is to compute the ratio of the variable of interest to an auxiliary variable, then apply this ratio to the total value of the auxiliary variable in the population to get the population estimate.
+
+The method is especially beneficial when there is a strong correlation between the study variable and the auxiliary variable. It can lead to more accurate estimates compared to simple random sampling, particularly when the auxiliary variable is easy to measure and reliably predicts the variable of interest. However, it requires careful application, especially in cases where the correlation between variables is weak, as it may not offer significant improvements in those cases.
+
+This approach has been applied in various fields, from agriculture to economics, and provides a clear example of how leveraging additional data can refine estimates beyond traditional means.
+
 ```{r}
 #| include: false
 #| warning: false
