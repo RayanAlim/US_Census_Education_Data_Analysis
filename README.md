@@ -2,8 +2,7 @@
 
 ## Overview
 
-This repo provides students an initial analysis of education attainment in California in 2022. It provides all the necessary tools to reproduce our findings
-
+This repo provides students an initial analysis of education attainment in California in 2022. It provides all the necessary tools to reproduce our findings.
 
 ## File Structure
 
@@ -18,5 +17,3 @@ The repo is structured as:
 ## Statement on LLM usage
 
 The overview of the Ratio Estimator Approach was written with the help of ChatGPT. The entire chat history is available in LLM-Usage.txt.
-
-
