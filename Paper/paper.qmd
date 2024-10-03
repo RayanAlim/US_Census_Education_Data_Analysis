@@ -23,6 +23,7 @@ bibliography: references.bib
 library(tidyverse)
 library(dplyr)
 library(here)
+library(knitr)
 ```
 
 # Data
@@ -75,6 +76,33 @@ estimated_total_by_state <- doctoral_by_state %>%
   mutate(estimated_total = doctoral_count / ratio_CA)
 ```
 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#  Summarize acc # of respondents by state
+total_respondents_by_state <- data %>%
+  group_by(STATEICP) %>%
+  summarise(total_respondents = n())
+
+# Add the acc # of respondents by states with the estimated counts
+comparison <- doctoral_by_state %>%
+  left_join(total_respondents_by_state, by = "STATEICP") %>%
+   arrange(by = "STATEICP") %>% 
+  mutate(estimated_total = doctoral_count / ratio_CA) %>%
+  select(STATEICP, doctoral_count, estimated_total, total_respondents)
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+table <- comparison %>%
+  kable(col.names = c("State ICP Code", "Doctoral Degree Holders", 
+                      "Estimated Total Respondents", "Actual Total Respondents"), 
+        caption = "Comparison of Estimated vs. Actual Respondents by State")
+table
+```
 
 
 # Appendix 
