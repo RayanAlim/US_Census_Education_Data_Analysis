@@ -1,4 +1,4 @@
-# Starter folder
+# California Education Attainment Census Data Analysis
 
 ## Overview
 
@@ -17,6 +17,6 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-The overview of the Ratio Estimator Approach was written with the help of ChatGPT 3.5. The entire chat history is available in LLM-Usage.txt.
+The overview of the Ratio Estimator Approach was written with the help of ChatGPT. The entire chat history is available in LLM-Usage.txt.
 
 
