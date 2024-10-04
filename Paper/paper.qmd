@@ -1,5 +1,5 @@
 ---
-title: "California Education Attainment Census Data Analysis"
+title: "California's Education Attainment Census Data Analysis"
 author: 
   - Rayan Awad Alim
   - Emily Su
@@ -115,7 +115,7 @@ The estimates and the actual number of respondents in @tbl-estimated-actual are 
 
 # Appendix 
 ## How to obtain IPUMS data
-In order to obtain the data from IPUMS [@@ipumsusa], first go to usa.ipums.org and then click on "Get Data" on the home page. Next click on "Select Samples", select only the 2022 ACS sample under the "USA SAMPLES" tab, and then "SUBMIT SAMPLE SELECTIONS". Then under "SELECT HARMONIZED VARIABLES" select "GEOGRAPHIC" under the "HOUSEHOLD" dropdown and choose the STATEICP variable. Under the PERSON dropdown, select EDUCATION and then the EDUC variable. After all this, click on VIEW CART on the top right and on the DATA CART Page click on "create data extract" and then on the Extract Request page make sure the data format is in the csv format. After submitting the extract on the Extract Request, create an account or log into IPUMS USA and wait for the extract to be finished and download the CSV. 
+In order to obtain the data from IPUMS [@ipumsusa], first go to usa.ipums.org and then click on "Get Data" on the home page. Next click on "Select Samples", select only the 2022 ACS sample under the "USA SAMPLES" tab, and then "SUBMIT SAMPLE SELECTIONS". Then under "SELECT HARMONIZED VARIABLES" select "GEOGRAPHIC" under the "HOUSEHOLD" dropdown and choose the STATEICP variable. Under the PERSON dropdown, select EDUCATION and then the EDUC variable. After all this, click on VIEW CART on the top right and on the DATA CART Page click on "create data extract" and then on the Extract Request page make sure the data format is in the csv format. After submitting the extract on the Extract Request, create an account or log into IPUMS USA and wait for the extract to be finished and download the CSV. 
 
 
 \newpage
